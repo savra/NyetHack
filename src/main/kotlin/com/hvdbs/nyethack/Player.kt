@@ -13,8 +13,8 @@ class Player(
         }
 
     init {
-        require(healthPoints > 0, {"healthPoints must be greater than zero."})
-        require(name.isNotBlank(), {"Player must have a name."})
+        require(healthPoints > 0, { "healthPoints must be greater than zero." })
+        require(name.isNotBlank(), { "Player must have a name." })
     }
 
     constructor(name: String) : this(
