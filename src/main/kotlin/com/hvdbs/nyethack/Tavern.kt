@@ -1,5 +1,6 @@
+package com.hvdbs.nyethack
+
 import java.io.File
-import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -79,7 +80,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val message = "$patronName buys a $name ($type) for $price."
     println(message)
 
-    //performPurchase(price.toDouble())
+    //com.hvdbs.nyethack.performPurchase(price.toDouble())
 
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims: ${toDragonSpeak("Ah, delicious $name!")}"
