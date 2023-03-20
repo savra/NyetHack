@@ -1,16 +1,40 @@
 package com.hvdbs.nyethack
 
+import com.hvdbs.nyethack.extensions.random
+import java.io.File
+
 class Player(
     _name: String,
-    var healthPoints: Int = 100,
+    override var healthPoints: Int = 100,
     var isBlessed: Boolean,
-    var isImmortal: Boolean
-) {
+    var isImmortal: Boolean) : Fightable {
+    override val diceCount: Int = 3
+    override val diceSides: Int = 6
+    override fun attack(opponent: Fightable): Int {
+        val damageDealt = if (isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+
+        opponent.healthPoints -= damageDealt
+
+        return damageDealt
+    }
+
     var name = _name
-        get() = field.capitalize()
+        get() = "${field.capitalize()} of $hometown"
         private set(value) {
             field = value.trim()
         }
+
+    val hometown by lazy { selectHometown() }
+    var currentPosition = Coordinate(0, 0)
+
+    private fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .random()
 
     init {
         require(healthPoints > 0, { "healthPoints must be greater than zero." })

@@ -1,5 +1,6 @@
 package com.hvdbs.nyethack
 
+import com.hvdbs.nyethack.extensions.random
 import java.io.File
 
 const val TAVERN_NAME = "Taernyl's Folly"
@@ -11,8 +12,6 @@ val menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n");
 val patronGold = mutableMapOf<String, Double>()
-
-val readOnlyPatronList = patronList.toList()
 
 fun main(args: Array<String>) {
     if (patronList.contains("Eli")) {
@@ -28,8 +27,8 @@ fun main(args: Array<String>) {
     }
 
     (0..9).forEach {
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
+        val first = patronList.random()
+        val last = lastName.random()
         val name = "$first $last"
         uniquePatrons += name
     }
@@ -41,7 +40,7 @@ fun main(args: Array<String>) {
     var orderCount = 0
 
     while (orderCount <= 9) {
-        placeOrder(uniquePatrons.shuffled().first(), menuList.shuffled().first())
+        placeOrder(uniquePatrons.random(), menuList.random())
         orderCount++
     }
 
